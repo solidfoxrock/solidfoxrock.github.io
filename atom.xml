@@ -4,7 +4,7 @@
   <title><![CDATA[Kien Nguyen's blog]]></title>
   <link href="http://solidfoxrock.github.io/atom.xml" rel="self"/>
   <link href="http://solidfoxrock.github.io/"/>
-  <updated>2014-01-12T23:51:48+07:00</updated>
+  <updated>2014-03-29T14:39:19+07:00</updated>
   <id>http://solidfoxrock.github.io/</id>
   <author>
     <name><![CDATA[Kien Nguyen]]></name>
@@ -12,5 +12,233 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Converting Character Set / Collation in MySQL databases]]></title>
+    <link href="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/"/>
+    <updated>2014-03-25T22:19:00+07:00</updated>
+    <id>http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases</id>
+    <content type="html"><![CDATA[<p>Recently I got a task to convert character sets / collations of all our database tables to <code>utf8</code> / <code>utf8_general_ci</code>. If you try googling for this topic you will see quite a lot of answers but most of them are not very accurate or completed. In this post I would like to summarize everything I gathered on the last few days about this topic. The goal is to convert all your data to use character set <code>utf8</code> and collation <code>utf8_general_ci</code>, plus fixing all default configurations to prevent wrong character set / collation in future when creating new tables / columns.</p>
+
+<h2>1. Change default server charset</h2>
+
+<p>First you need to make sure the default character set and collation of your database server is set correctly.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;character_set_server&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>+----------------------+-------+
+</span><span class='line'>| Variable_name        | Value |
+</span><span class='line'>+----------------------+-------+
+</span><span class='line'>| character_set_server | utf8  |
+</span><span class='line'>+----------------------+-------+
+</span><span class='line'>1 row in set (0.00 sec)
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;collation_server&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>+------------------+-----------------+
+</span><span class='line'>| Variable_name    | Value           |
+</span><span class='line'>+------------------+-----------------+
+</span><span class='line'>| collation_server | utf8_general_ci |
+</span><span class='line'>+------------------+-----------------+
+</span><span class='line'>1 row in set (0.00 sec)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the values are incorrect, set them with these queries:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SET</span> <span class="k">GLOBAL</span> <span class="n">character_set_server</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">;</span>
+</span><span class='line'><span class="k">SET</span> <span class="k">GLOBAL</span> <span class="n">collation_server</span> <span class="o">=</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will also need to add these into your <code>my.cnf</code> config file, otherwise after restarting, your server will lose the configurations.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[mysqld]
+</span><span class='line'>character-set-server = utf8
+</span><span class='line'>collation-server     = utf8_general_ci</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now new databases created in future (without specified specific character set / collation in <code>CREATE DATABASE</code> command) will have correct character set and collation.</p>
+
+<h2>2. Change default database charset</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">ALTER</span> <span class="k">DATABASE</span> <span class="n">test</span> <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8</span> <span class="k">COLLATE</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now new tables created in future in this database (without specified specific character set / collation in <code>CREATE TABLE</code> command) will have correct character set and collation.</p>
+
+<h2>3. Change default table charset</h2>
+
+<p>Now you need to change default character set / collation of all tables having wrong character set / collation in your database. This query will generate <code>ALTER TABLE</code> queries for all those tables if there is any:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">&#39;ALTER TABLE `&#39;</span><span class="p">,</span> <span class="n">CONCAT</span><span class="p">(</span><span class="o">`</span><span class="n">table_schema</span><span class="o">`</span><span class="p">,</span> <span class="s1">&#39;`.`&#39;</span><span class="p">,</span> <span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="p">),</span> <span class="s1">&#39;` CHARACTER SET utf8 COLLATE utf8_general_ci;&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="o">`</span><span class="n">queries</span><span class="o">`</span>
+</span><span class='line'><span class="k">FROM</span> <span class="o">`</span><span class="n">information_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">TABLES</span><span class="o">`</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="o">`</span><span class="n">table_schema</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="k">AND</span> <span class="o">`</span><span class="n">table_collation</span><span class="o">`</span> <span class="o">!=</span> <span class="s1">&#39;utf8_general_ci&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>+------------------------------------------------------------------------------+
+</span><span class='line'>| queries                                                                      |
+</span><span class='line'>+------------------------------------------------------------------------------+
+</span><span class='line'>| ALTER TABLE `test`.`x` CHARACTER SET utf8 COLLATE utf8_general_ci;  |
+</span><span class='line'>| ALTER TABLE `test`.`y` CHARACTER SET utf8 COLLATE utf8_general_ci;  |
+</span><span class='line'>| ALTER TABLE `test`.`z` CHARACTER SET utf8 COLLATE utf8_general_ci;  |
+</span><span class='line'>+------------------------------------------------------------------------------+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After running above <code>ALTER TABLE</code> queries, you can confirm the result by this query:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="p">,</span> <span class="o">`</span><span class="n">table_collation</span><span class="o">`</span>
+</span><span class='line'><span class="k">FROM</span> <span class="o">`</span><span class="n">information_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">TABLES</span><span class="o">`</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="o">`</span><span class="n">table_schema</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="k">AND</span> <span class="o">`</span><span class="n">table_collation</span><span class="o">`</span> <span class="o">!=</span> <span class="s1">&#39;utf8_general_ci&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Empty set (0.33 sec)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now new text columns created in future in the above tables (without specified specific character set / collation) will have correct character set and collation. The actual column data types that can have a character set are: <code>CHAR</code>, <code>VARCHAR</code>, <code>TEXT</code>, <code>ENUM</code>, <code>SET</code>. Note that <code>TEXT</code> includes <code>TEXT</code>, <code>TINYTEXT</code>, <code>MEDIUMTEXT</code> and <code>LONGTEXT</code>.</p>
+
+<h2>4. Convert column charset</h2>
+
+<p>In this step we need to find all table columns having wrong character set / collation and convert them. This query will list all those columns:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="p">,</span> <span class="o">`</span><span class="k">column_name</span><span class="o">`</span><span class="p">,</span> <span class="o">`</span><span class="n">column_type</span><span class="o">`</span><span class="p">,</span> <span class="o">`</span><span class="k">character_set_name</span><span class="p">,</span> <span class="o">`</span><span class="k">collation_name</span><span class="o">`</span>
+</span><span class='line'><span class="k">FROM</span> <span class="o">`</span><span class="n">information_schema</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">columns</span><span class="o">`</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="o">`</span><span class="n">table_schema</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span> <span class="k">AND</span> <span class="p">(</span><span class="o">`</span><span class="k">character_set_name</span><span class="o">`</span> <span class="o">!=</span> <span class="s1">&#39;utf8&#39;</span> <span class="k">OR</span> <span class="o">`</span><span class="k">collation_name</span><span class="o">`</span> <span class="o">!=</span> <span class="s1">&#39;utf8_general_ci&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>+------------+-------------+--------------+--------------------+-------------------+
+</span><span class='line'>| table_name | column_name | column_type  | character_set_name | collation_name    |
+</span><span class='line'>+------------+-------------+--------------+--------------------+-------------------+
+</span><span class='line'>| customer   | name        | varchar(50)  | latin1             | latin1_swedish_ci |
+</span><span class='line'>| product    | name        | varchar(255) | latin1             | latin1_swedish_ci |
+</span><span class='line'>| product    | description | text         | latin1             | latin1_swedish_ci |
+</span><span class='line'>+------------+-------------+--------------+--------------------+-------------------+
+</span><span class='line'>3 rows in set (0.01 sec)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The way to convert is using an <code>ALTER TABLE</code> statement for each table, with <code>MODIFY</code> clauses for each column in that table. For example:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">customer</span><span class="o">`</span>
+</span><span class='line'>    <span class="k">MODIFY</span> <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="n">CHARSET</span> <span class="n">utf8</span> <span class="k">COLLATE</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
+</span><span class='line'><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">test</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="n">product</span><span class="o">`</span>
+</span><span class='line'>    <span class="k">MODIFY</span> <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8</span> <span class="k">COLLATE</span> <span class="n">utf8_general_ci</span><span class="p">,</span>
+</span><span class='line'>    <span class="k">MODIFY</span> <span class="o">`</span><span class="n">description</span><span class="o">`</span> <span class="nb">text</span> <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">utf8</span> <span class="k">COLLATE</span> <span class="n">utf8_general_ci</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The tricky thing here is the column definition will be modified to whatever you put in your <code>MODIFY</code> statement, so if my <code>product</code>.<code>name</code> column above was <code>NOT NULL</code>, after running the statements above, it will become nullable. To make it easy I have written a <a href="https://gist.github.com/solidfoxrock/9849810">PHP script</a> to do this job. The script will generate all these <code>ALTER TABLE MODIFY</code> queries for you. The generated queries preserve your existing column definitions by reading them from <code>SHOW CREATE TABLE</code>. Please let me know if you have any problems running this script.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First entry]]></title>
+    <link href="http://solidfoxrock.github.io/blog/2013/10/17/first-entry/"/>
+    <updated>2013-10-17T00:58:00+07:00</updated>
+    <id>http://solidfoxrock.github.io/blog/2013/10/17/first-entry</id>
+    <content type="html"><![CDATA[<p>Hello world!</p>
+
+<p>Finally my blog is up now.</p>
+
+<p>I wanted to write a technical blog years ago, but because of my lame excuse &ldquo;I don&rsquo;t have time&rdquo;, I couldn&rsquo;t start it until today. Actually I have been playing with <a href="http://wordpress.com/%20Wordpress">Wordpress</a> and <a href="http://www.tumblr.com/">Tumblr</a> before, they&rsquo;re both extremely good blogging platforms. But one year ago I discovered <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://octopress.org%20Octopress">Octopress</a>, and the idea of blogging using terminal and <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> sounds awesome to me. The consequence of that is this blog, where you can find my posts about random stuff that I&rsquo;ve stumbled upon, mostly about programming, web development and other tech topics.</p>
+
+<p>To end this boring first entry, here is a random nerdy Chuck Norris joke:</p>
+
+<blockquote><p><span id="joke">Loading joke&#8230;</span></p></blockquote>
+
+
+<p><em>(refresh to get another one)</em></p>
+
+<script type="text/javascript">
+$(function() {
+    var url = 'http://api.icndb.com/jokes/random?limitTo=[nerdy]',
+        successCB = function(result) {
+            var joke = result.type == 'success' ? result.value.joke : 'Something\'s wrong...';
+            $('#joke').html(joke);
+        };
+    $.ajax({
+        url: url,
+        dataType: "jsonp",
+        type: "GET",
+        success: function(result) {
+            successCB(result);
+        }
+    });
+})
+</script>
+
+]]></content>
+  </entry>
   
 </feed>

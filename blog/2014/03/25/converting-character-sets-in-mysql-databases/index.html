@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Kien Nguyen's blog</title>
+  <title>Converting Character Set / Collation in MySQL databases - Kien Nguyen's blog</title>
   <meta name="author" content="Kien Nguyen">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://solidfoxrock.github.io">
+  <link rel="canonical" href="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Kien Nguyen's blog" type="application/atom+xml">
@@ -63,15 +63,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/03/25/converting-character-sets-in-mysql-databases/">Converting Character Set / Collation in MySQL Databases</a></h1>
+      <h1 class="entry-title">Converting Character Set / Collation in MySQL Databases</h1>
     
     
       <p class="meta">
@@ -89,14 +86,14 @@
 
 <time datetime="2014-03-25T22:19:00+07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
         
-         | <a href="/blog/2014/03/25/converting-character-sets-in-mysql-databases/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Recently I got a task to convert character sets / collations of all our database tables to <code>utf8</code> / <code>utf8_general_ci</code>. If you try googling for this topic you will see quite a lot of answers but most of them are not very accurate or completed. In this post I would like to summarize everything I gathered on the last few days about this topic. The goal is to convert all your data to use character set <code>utf8</code> and collation <code>utf8_general_ci</code>, plus fixing all default configurations to prevent wrong character set / collation in future when creating new tables / columns.</p>
+<div class="entry-content"><p>Recently I got a task to convert character sets / collations of all our database tables to <code>utf8</code> / <code>utf8_general_ci</code>. If you try googling for this topic you will see quite a lot of answers but most of them are not very accurate or completed. In this post I would like to summarize everything I gathered on the last few days about this topic. The goal is to convert all your data to use character set <code>utf8</code> and collation <code>utf8_general_ci</code>, plus fixing all default configurations to prevent wrong character set / collation in future when creating new tables / columns.</p>
 
 <h2>1. Change default server charset</h2>
 
@@ -278,22 +275,16 @@
 
 <p>The tricky thing here is the column definition will be modified to whatever you put in your <code>MODIFY</code> statement, so if my <code>product</code>.<code>name</code> column above was <code>NOT NULL</code>, after running the statements above, it will become nullable. To make it easy I have written a <a href="https://gist.github.com/solidfoxrock/9849810">PHP script</a> to do this job. The script will generate all these <code>ALTER TABLE MODIFY</code> queries for you. The generated queries preserve your existing column definitions by reading them from <code>SHOW CREATE TABLE</code>. Please let me know if you have any problems running this script.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/17/first-entry/">First Entry</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kien Nguyen</span></span>
+
+      
 
 
 
@@ -305,59 +296,41 @@
   
 
 
-<time datetime="2013-10-17T00:58:00+07:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/17/first-entry/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2014-03-25T22:19:00+07:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/" data-via="solidfoxrock" data-counturl="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/17/first-entry/" title="Previous Post: First entry">&laquo; First entry</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><p>Hello world!</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
-<p>Finally my blog is up now.</p>
-
-<p>I wanted to write a technical blog years ago, but because of my lame excuse &ldquo;I don&rsquo;t have time&rdquo;, I couldn&rsquo;t start it until today. Actually I have been playing with <a href="http://wordpress.com/%20Wordpress">Wordpress</a> and <a href="http://www.tumblr.com/">Tumblr</a> before, they&rsquo;re both extremely good blogging platforms. But one year ago I discovered <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://octopress.org%20Octopress">Octopress</a>, and the idea of blogging using terminal and <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> sounds awesome to me. The consequence of that is this blog, where you can find my posts about random stuff that I&rsquo;ve stumbled upon, mostly about programming, web development and other tech topics.</p>
-
-<p>To end this boring first entry, here is a random nerdy Chuck Norris joke:</p>
-
-<blockquote><p><span id="joke">Loading joke&#8230;</span></p></blockquote>
-
-
-<p><em>(refresh to get another one)</em></p>
-
-<script type="text/javascript">
-$(function() {
-    var url = 'http://api.icndb.com/jokes/random?limitTo=[nerdy]',
-        successCB = function(result) {
-            var joke = result.type == 'success' ? result.value.joke : 'Something\'s wrong...';
-            $('#joke').html(joke);
-        };
-    $.ajax({
-        url: url,
-        dataType: "jsonp",
-        type: "GET",
-        success: function(result) {
-            successCB(result);
-        }
-    });
-})
-</script>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -382,6 +355,7 @@ $(function() {
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -396,7 +370,10 @@ $(function() {
       var disqus_shortname = 'kiennguyen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/';
+        var disqus_url = 'http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
