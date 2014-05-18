@@ -5,11 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>First entry - Kien Nguyen's blog</title>
+  <title>Showing current git branch name in your bash prompt - Kien Nguyen's blog</title>
   <meta name="author" content="Kien Nguyen">
 
   
-  <meta name="description" content="Hello world! Finally my blog is up now. I wanted to write a technical blog years ago, but because of my lame excuse &ldquo;I don&rsquo;t have time& &hellip;">
+  <meta name="description" content="Here is my prompt which I think very nice: To have this prompt you need the following into your ~/.bash_profile: 1
+2
+3
+4
+5
+6
+7
+COLORWHITE=&#39;\[\033 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +25,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://solidfoxrock.github.io/blog/2013/10/17/first-entry">
+  <link rel="canonical" href="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Kien Nguyen's blog" type="application/atom+xml">
@@ -68,7 +75,7 @@
   
   <header>
     
-      <h1 class="entry-title">First Entry</h1>
+      <h1 class="entry-title">Showing Current Git Branch Name in Your Bash Prompt</h1>
     
     
       <p class="meta">
@@ -84,7 +91,7 @@
   
 
 
-<time datetime="2013-10-17T00:58:00+07:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
+<time datetime="2014-05-18T14:40:21+07:00" pubdate data-updated="true">May 18<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,37 +100,44 @@
   </header>
 
 
-<div class="entry-content"><p>Hello world!</p>
+<div class="entry-content"><p>Here is my prompt which I think very nice:</p>
 
-<p>Finally my blog is up now.</p>
+<p><img src="http://solidfoxrock.github.io/images/myprompt.png" alt="Alt image" /></p>
 
-<p>I wanted to write a technical blog years ago, but because of my lame excuse &ldquo;I don&rsquo;t have time&rdquo;, I couldn&rsquo;t start it until today. Actually I have been playing with <a href="http://wordpress.com/%20Wordpress">Wordpress</a> and <a href="http://www.tumblr.com/">Tumblr</a> before, they&rsquo;re both extremely good blogging platforms. But one year ago I discovered <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://octopress.org%20Octopress">Octopress</a>, and the idea of blogging using terminal and <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> sounds awesome to me. The consequence of that is this blog, where you can find my posts about random stuff that I&rsquo;ve stumbled upon, mostly about programming, web development and other tech topics.</p>
+<p>To have this prompt you need the following into your <code>~/.bash_profile</code>:</p>
 
-<p>To end this boring first entry, here is a random nerdy Chuck Norris joke:</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">COLORWHITE</span><span class="o">=</span><span class="s1">&#39;\[\033[00m\]&#39;</span>
+</span><span class='line'><span class="nv">COLORGREEN</span><span class="o">=</span><span class="s1">&#39;\[\033[01;32m\]&#39;</span>
+</span><span class='line'><span class="nv">COLORPINK</span><span class="o">=</span><span class="s1">&#39;\[\033[01m\]&#39;</span>
+</span><span class='line'><span class="nv">COLORLAVENDER</span><span class="o">=</span><span class="s1">&#39;\[\033[01;36m\]&#39;</span>
+</span><span class='line'><span class="nv">COLORYELLOW</span><span class="o">=</span><span class="s1">&#39;\[\033[01;33m\]&#39;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span>1
+</span><span class='line'><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="nv">$COLORGREEN</span><span class="s1">&#39;\u@\h&#39;</span><span class="nv">$COLORWHITE</span><span class="s1">&#39;[&#39;</span><span class="nv">$COLORPINK</span><span class="s1">&#39;\t&#39;</span><span class="nv">$COLORWHITE</span><span class="s1">&#39;]:&#39;</span><span class="nv">$COLORLAVENDER</span><span class="s1">&#39;\w&#39;</span><span class="nv">$COLORYELLOW</span><span class="s1">&#39;$(__git_ps1)&#39;</span><span class="nv">$COLORWHITE</span><span class="s1">&#39;\n\$ &#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<blockquote><p><span id="joke">Loading joke&#8230;</span></p></blockquote>
+
+<p>If opening a new console gives you the error <code>bash: __git_ps1: command not found</code>, then you need to do these extra steps:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -sL -o ~/.git-prompt.sh https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p><em>(refresh to get another one)</em></p>
+<p>Add the following line into your <code>~/.bash_profile</code>, before the line <code>export PS1</code>:</p>
 
-<script type="text/javascript">
-$(function() {
-    var url = 'http://api.icndb.com/jokes/random?limitTo=[nerdy]',
-        successCB = function(result) {
-            var joke = result.type == 'success' ? result.value.joke : 'Something\'s wrong...';
-            $('#joke').html(joke);
-        };
-    $.ajax({
-        url: url,
-        dataType: "jsonp",
-        type: "GET",
-        success: function(result) {
-            successCB(result);
-        }
-    });
-})
-</script>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.git-prompt.sh
+</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Thanks to <a href="http://stackoverflow.com/a/12871094/195929">Mark Longair&rsquo;s answer</a> on StackOverflow</p>
 </div>
 
 
@@ -146,15 +160,21 @@ $(function() {
   
 
 
-<time datetime="2013-10-17T00:58:00+07:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
+<time datetime="2014-05-18T14:40:21+07:00" pubdate data-updated="true">May 18<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/terminal/'>terminal</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://solidfoxrock.github.io/blog/2013/10/17/first-entry/" data-via="solidfoxrock" data-counturl="http://solidfoxrock.github.io/blog/2013/10/17/first-entry/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/" data-via="solidfoxrock" data-counturl="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/" >Tweet</a>
   
   
   
@@ -165,8 +185,8 @@ $(function() {
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/" title="Previous Post: Adding Git Bash Completion on Mac OS X Mavericks">&laquo; Adding Git Bash Completion on Mac OS X Mavericks</a>
       
-        <a class="basic-alignment right" href="/blog/2014/03/25/converting-character-sets-in-mysql-databases/" title="Next Post: Converting Character Set / Collation in MySQL databases">Converting Character Set / Collation in MySQL databases &raquo;</a>
       
     </p>
   </footer>
@@ -229,8 +249,8 @@ $(function() {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://solidfoxrock.github.io/blog/2013/10/17/first-entry/';
-        var disqus_url = 'http://solidfoxrock.github.io/blog/2013/10/17/first-entry/';
+        var disqus_identifier = 'http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/';
+        var disqus_url = 'http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/';
         var disqus_script = 'embed.js';
       
     (function () {

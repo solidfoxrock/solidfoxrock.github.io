@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: osx | Kien Nguyen's blog]]></title>
+  <link href="http://solidfoxrock.github.io/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="http://solidfoxrock.github.io/"/>
+  <updated>2014-05-18T15:54:31+07:00</updated>
+  <id>http://solidfoxrock.github.io/</id>
+  <author>
+    <name><![CDATA[Kien Nguyen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Adding Git Bash Completion on Mac OS X Mavericks]]></title>
+    <link href="http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
+    <updated>2014-05-18T13:18:31+07:00</updated>
+    <id>http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;re using git commands in terminal a lot then having bash completion can save you many keystrokes. First you need to install <code>bash-completion</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install bash-completion
+</span><span class='line'>curl -sOL &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/git/git/raw/master/contrib/completion/git-completion.bash&quot;</span>&gt;https://github.com/git/git/raw/master/contrib/completion/git-completion.bash&lt;/a&gt;
+</span><span class='line'>mv git-completion.bash <span class="k">$(</span>brew &amp;mdash;prefix<span class="k">)</span>/etc/bash_completion.d/git-completion
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Then just do what brew tells you, add the following to your <code>~/.bash_profile</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="k">$(</span>brew &amp;mdash;prefix<span class="k">)</span>/etc/bash_completion <span class="o">]</span>; <span class="k">then</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;. <span class="k">$(</span>brew --prefix<span class="k">)</span>/etc/bash_completion
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;fi
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>It&rsquo;s done, now you have bash completion for git commands, for example typing <code>git che</code> and pressing <code>TAB</code> twice gives me this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git che
+</span><span class='line'>checkout      cherry        cherry-pick
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

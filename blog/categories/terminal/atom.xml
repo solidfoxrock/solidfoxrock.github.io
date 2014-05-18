@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: terminal | Kien Nguyen's blog]]></title>
+  <link href="http://solidfoxrock.github.io/blog/categories/terminal/atom.xml" rel="self"/>
+  <link href="http://solidfoxrock.github.io/"/>
+  <updated>2014-05-18T15:54:31+07:00</updated>
+  <id>http://solidfoxrock.github.io/</id>
+  <author>
+    <name><![CDATA[Kien Nguyen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Showing current git branch name in your bash prompt]]></title>
+    <link href="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/"/>
+    <updated>2014-05-18T14:40:21+07:00</updated>
+    <id>http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt</id>
+    <content type="html"><![CDATA[<p>Here is my prompt which I think very nice:</p>
+
+<p><img src="http://solidfoxrock.github.io/images/myprompt.png" alt="Alt image" /></p>
+
+<p>To have this prompt you need the following into your <code>~/.bash_profile</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">COLORWHITE</span><span class="o">=</span>&amp;lsquo;<span class="o">[</span><span class="se">\0</span>33<span class="o">[</span>00m<span class="o">]</span>&amp;rsquo;
+</span><span class='line'><span class="nv">COLORGREEN</span><span class="o">=</span>&amp;lsquo;<span class="o">[</span><span class="se">\0</span>33<span class="o">[</span>01;32m<span class="o">]</span>&amp;rsquo;
+</span><span class='line'><span class="nv">COLORPINK</span><span class="o">=</span>&amp;lsquo;<span class="o">[</span><span class="se">\0</span>33<span class="o">[</span>01m<span class="o">]</span>&amp;rsquo;
+</span><span class='line'><span class="nv">COLORLAVENDER</span><span class="o">=</span>&amp;lsquo;<span class="o">[</span><span class="se">\0</span>33<span class="o">[</span>01;36m<span class="o">]</span>&amp;rsquo;
+</span><span class='line'><span class="nv">COLORYELLOW</span><span class="o">=</span>&amp;lsquo;<span class="o">[</span><span class="se">\0</span>33<span class="o">[</span>01;33m<span class="o">]</span>&amp;rsquo;
+</span><span class='line'><span class="nb">export </span><span class="nv">GIT_PS1_SHOWDIRTYSTATE</span><span class="o">=</span>1
+</span><span class='line'><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="nv">$COLORGREEN</span><span class="s1">&#39;\u@\h&#39;</span><span class="nv">$COLORWHITE</span><span class="s1">&#39;[&amp;lsquo;$COLORPINK&amp;rsquo;\t&#39;</span><span class="nv">$COLORWHITE</span><span class="s1">&#39;]:&amp;lsquo;$COLORLAVENDER&amp;rsquo;\w&#39;</span><span class="nv">$COLORYELLOW</span><span class="err">&#39;</span><span class="k">$(</span>__git_ps1<span class="k">)</span>&amp;lsquo;<span class="nv">$COLORWHITE</span>&amp;rsquo;<span class="se">\n\$</span> &amp;lsquo;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If opening a new console gives you the error <code>bash: __git_ps1: command not found</code>, then you need to do these extra steps:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>curl -sL -o ~/.git-prompt.sh &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh&quot;</span>&gt;https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh&lt;/a&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Add the following line into your <code>~/.bash_profile</code>, before the line <code>export PS1</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span> ~/.git-prompt.sh
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Thanks to <a href="http://stackoverflow.com/a/12871094/195929">Mark Longair&rsquo;s answer</a> on StackOverflow</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding Git Bash Completion on Mac OS X Mavericks]]></title>
+    <link href="http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
+    <updated>2014-05-18T13:18:31+07:00</updated>
+    <id>http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;re using git commands in terminal a lot then having bash completion can save you many keystrokes. First you need to install <code>bash-completion</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install bash-completion
+</span><span class='line'>curl -sOL &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://github.com/git/git/raw/master/contrib/completion/git-completion.bash&quot;</span>&gt;https://github.com/git/git/raw/master/contrib/completion/git-completion.bash&lt;/a&gt;
+</span><span class='line'>mv git-completion.bash <span class="k">$(</span>brew &amp;mdash;prefix<span class="k">)</span>/etc/bash_completion.d/git-completion
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Then just do what brew tells you, add the following to your <code>~/.bash_profile</code>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="k">$(</span>brew &amp;mdash;prefix<span class="k">)</span>/etc/bash_completion <span class="o">]</span>; <span class="k">then</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;. <span class="k">$(</span>brew --prefix<span class="k">)</span>/etc/bash_completion
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;fi
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>It&rsquo;s done, now you have bash completion for git commands, for example typing <code>git che</code> and pressing <code>TAB</code> twice gives me this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git che
+</span><span class='line'>checkout      cherry        cherry-pick
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
