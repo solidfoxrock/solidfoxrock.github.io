@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: terminal | Kien Nguyen's blog]]></title>
-  <link href="http://solidfoxrock.github.io/blog/categories/terminal/atom.xml" rel="self"/>
-  <link href="http://solidfoxrock.github.io/"/>
-  <updated>2014-05-18T15:54:31+07:00</updated>
-  <id>http://solidfoxrock.github.io/</id>
+  <link href="http://kiennguyen.me/blog/categories/terminal/atom.xml" rel="self"/>
+  <link href="http://kiennguyen.me/"/>
+  <updated>2014-05-18T16:20:13+07:00</updated>
+  <id>http://kiennguyen.me/</id>
   <author>
     <name><![CDATA[Kien Nguyen]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Showing current git branch name in your bash prompt]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/"/>
+    <link href="http://kiennguyen.me/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/"/>
     <updated>2014-05-18T14:40:21+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt</id>
+    <id>http://kiennguyen.me/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt</id>
     <content type="html"><![CDATA[<p>Here is my prompt which I think very nice:</p>
 
-<p><img src="http://solidfoxrock.github.io/images/myprompt.png" alt="Alt image" /></p>
+<p><img src="http://kiennguyen.me/images/myprompt.png" alt="Alt image" /></p>
 
 <p>To have this prompt you need the following into your <code>~/.bash_profile</code>:</p>
 
@@ -58,9 +58,9 @@
   
   <entry>
     <title type="html"><![CDATA[Adding Git Bash Completion on Mac OS X Mavericks]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
+    <link href="http://kiennguyen.me/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
     <updated>2014-05-18T13:18:31+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
+    <id>http://kiennguyen.me/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
     <content type="html"><![CDATA[<p>If you&rsquo;re using git commands in terminal a lot then having bash completion can save you many keystrokes. First you need to install <code>bash-completion</code>:</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

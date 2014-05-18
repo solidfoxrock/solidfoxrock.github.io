@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://solidfoxrock.github.io/sitemap.xml 
+Sitemap: http://kiennguyen.me/sitemap.xml 

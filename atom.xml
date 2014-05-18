@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Kien Nguyen's blog]]></title>
-  <link href="http://solidfoxrock.github.io/atom.xml" rel="self"/>
-  <link href="http://solidfoxrock.github.io/"/>
-  <updated>2014-05-18T15:54:31+07:00</updated>
-  <id>http://solidfoxrock.github.io/</id>
+  <link href="http://kiennguyen.me/atom.xml" rel="self"/>
+  <link href="http://kiennguyen.me/"/>
+  <updated>2014-05-18T16:20:13+07:00</updated>
+  <id>http://kiennguyen.me/</id>
   <author>
     <name><![CDATA[Kien Nguyen]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Showing current git branch name in your bash prompt]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/"/>
+    <link href="http://kiennguyen.me/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/"/>
     <updated>2014-05-18T14:40:21+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt</id>
+    <id>http://kiennguyen.me/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt</id>
     <content type="html"><![CDATA[<p>Here is my prompt which I think very nice:</p>
 
-<p><img src="http://solidfoxrock.github.io/images/myprompt.png" alt="Alt image" /></p>
+<p><img src="http://kiennguyen.me/images/myprompt.png" alt="Alt image" /></p>
 
 <p>To have this prompt you need the following into your <code>~/.bash_profile</code>:</p>
 
@@ -61,9 +61,9 @@
   
   <entry>
     <title type="html"><![CDATA[Adding Git Bash Completion on Mac OS X Mavericks]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
+    <link href="http://kiennguyen.me/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/"/>
     <updated>2014-05-18T13:18:31+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
+    <id>http://kiennguyen.me/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks</id>
     <content type="html"><![CDATA[<p>If you&rsquo;re using git commands in terminal a lot then having bash completion can save you many keystrokes. First you need to install <code>bash-completion</code>:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -99,9 +99,9 @@
   
   <entry>
     <title type="html"><![CDATA[Converting Character Set / Collation in MySQL databases]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/"/>
+    <link href="http://kiennguyen.me/blog/2014/03/25/converting-character-sets-in-mysql-databases/"/>
     <updated>2014-03-25T22:19:00+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases</id>
+    <id>http://kiennguyen.me/blog/2014/03/25/converting-character-sets-in-mysql-databases</id>
     <content type="html"><![CDATA[<p>Recently I got a task to convert character sets / collations of all our database tables to <code>utf8</code> / <code>utf8_general_ci</code>. If you try googling for this topic you will see quite a lot of answers but most of them are not very accurate or completed. In this post I would like to summarize everything I gathered on the last few days about this topic. The goal is to convert all your data to use character set <code>utf8</code> and collation <code>utf8_general_ci</code>, plus fixing all default configurations to prevent wrong character set / collation in future when creating new tables / columns.</p>
 
 <h2>1. Change default server charset</h2>
@@ -288,9 +288,9 @@
   
   <entry>
     <title type="html"><![CDATA[First entry]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2013/10/17/first-entry/"/>
+    <link href="http://kiennguyen.me/blog/2013/10/17/first-entry/"/>
     <updated>2013-10-17T00:58:00+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2013/10/17/first-entry</id>
+    <id>http://kiennguyen.me/blog/2013/10/17/first-entry</id>
     <content type="html"><![CDATA[<p>Hello world!</p>
 
 <p>Finally my blog is up now.</p>

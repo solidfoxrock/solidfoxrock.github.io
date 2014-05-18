@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: mysql | Kien Nguyen's blog]]></title>
-  <link href="http://solidfoxrock.github.io/blog/categories/mysql/atom.xml" rel="self"/>
-  <link href="http://solidfoxrock.github.io/"/>
-  <updated>2014-05-18T15:54:31+07:00</updated>
-  <id>http://solidfoxrock.github.io/</id>
+  <link href="http://kiennguyen.me/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://kiennguyen.me/"/>
+  <updated>2014-05-18T16:20:13+07:00</updated>
+  <id>http://kiennguyen.me/</id>
   <author>
     <name><![CDATA[Kien Nguyen]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Converting Character Set / Collation in MySQL databases]]></title>
-    <link href="http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/"/>
+    <link href="http://kiennguyen.me/blog/2014/03/25/converting-character-sets-in-mysql-databases/"/>
     <updated>2014-03-25T22:19:00+07:00</updated>
-    <id>http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases</id>
+    <id>http://kiennguyen.me/blog/2014/03/25/converting-character-sets-in-mysql-databases</id>
     <content type="html"><![CDATA[<p>Recently I got a task to convert character sets / collations of all our database tables to <code>utf8</code> / <code>utf8_general_ci</code>. If you try googling for this topic you will see quite a lot of answers but most of them are not very accurate or completed. In this post I would like to summarize everything I gathered on the last few days about this topic. The goal is to convert all your data to use character set <code>utf8</code> and collation <code>utf8_general_ci</code>, plus fixing all default configurations to prevent wrong character set / collation in future when creating new tables / columns.</p>
 
 <h2>1. Change default server charset</h2>

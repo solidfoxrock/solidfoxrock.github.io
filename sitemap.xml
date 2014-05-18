@@ -1,49 +1,49 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://solidfoxrock.github.io/blog/2013/10/17/first-entry/</loc>
+        <loc>http://kiennguyen.me/blog/2013/10/17/first-entry/</loc>
         <lastmod>2014-03-25T23:32:05+07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://solidfoxrock.github.io/blog/2014/03/25/converting-character-sets-in-mysql-databases/
+            http://kiennguyen.me/blog/2014/03/25/converting-character-sets-in-mysql-databases/
         </loc>
         <lastmod>2014-05-18T13:30:55+07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://solidfoxrock.github.io/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/
+            http://kiennguyen.me/blog/2014/05/18/adding-git-bash-completion-on-mac-os-x-mavericks/
         </loc>
         <lastmod>2014-05-18T14:41:16+07:00</lastmod>
     </url>
     <url>
         <loc>
-            http://solidfoxrock.github.io/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/
+            http://kiennguyen.me/blog/2014/05/18/showing-current-git-branch-name-in-your-bash-prompt/
         </loc>
         <lastmod>2014-05-18T15:16:38+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/404.html</loc>
+        <loc>http://kiennguyen.me/404.html</loc>
         <lastmod>2014-01-11T11:54:01+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/about/</loc>
+        <loc>http://kiennguyen.me/about/</loc>
         <lastmod>2014-01-11T11:54:01+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/blog/archives/</loc>
+        <loc>http://kiennguyen.me/blog/archives/</loc>
         <lastmod>2014-05-18T15:16:38+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/blog/</loc>
+        <loc>http://kiennguyen.me/blog/</loc>
         <lastmod>2014-05-18T15:16:38+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/</loc>
+        <loc>http://kiennguyen.me/</loc>
         <lastmod>2014-05-18T15:16:38+07:00</lastmod>
     </url>
     <url>
-        <loc>http://solidfoxrock.github.io/robots.txt</loc>
+        <loc>http://kiennguyen.me/robots.txt</loc>
         <lastmod>2014-01-11T11:54:01+07:00</lastmod>
     </url>
 </urlset>
